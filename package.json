@@ -34,7 +34,7 @@
     "css-mqpacker": "^7.0.0",
     "csswring": "^7.0.0",
     "eslint": "^1.7.3",
-    "gulp": "^3.9.0",
+    "gulp": "^4.0.2",
     "gulp-less": "^4.0.1",
     "gulp-plumber": "^1.0.1",
     "gulp-postcss": "^8.0.0",
