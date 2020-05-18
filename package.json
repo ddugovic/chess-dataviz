@@ -31,7 +31,7 @@
     "babelify": "^7.0.2",
     "browser-sync": "^2.9.11",
     "browserify": "^16.5.1",
-    "css-mqpacker": "^4.0.0",
+    "css-mqpacker": "^7.0.0",
     "csswring": "^7.0.0",
     "eslint": "^1.7.3",
     "gulp": "^3.9.0",
