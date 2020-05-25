@@ -91,7 +91,7 @@ export class MovePaths {
 		this.dataContainer.selectAll('.move-path').remove();
 
 		this.dataContainer.selectAll('.move-path').data(data)
-		.enter().append('path')
+			.enter().append('path')
 			.attr('class', 'move-path')
 			.attr('d', d => {
 				//start and end points

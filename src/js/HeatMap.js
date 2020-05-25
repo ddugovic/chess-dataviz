@@ -111,25 +111,25 @@ export class HeatMap {
 		//enter
 		heatSquares.enter()
 			.append('rect')
-				.attr('x', (d, i) => (i % 8 * this._options.squareWidth) + (this._options.squareWidth / 2))
-				.attr('y', (d, i) => (Math.floor(i / 8) * this._options.squareWidth) + (this._options.squareWidth / 2))
-				.attr('width', (d) => squareSize(d) + 'px')
-				.attr('height', (d) => squareSize(d) + 'px')
-				.attr('transform', (d) => {
-					let halfWidth = squareSize(d) / 2;
-					return 'translate(-' + halfWidth + ',-' + halfWidth + ')';
-				})
-				.attr('class', 'heat-square')
-				.style('fill', (d, i) => squareColor(d))
-				.on('mouseenter', (d, i) => {
-					this.dispatch.mouseenter(d[this._options.accessor.piece][this._options.accessor.color]);
-				})
-				.on('mousemove', (d, i) => {
-					this.dispatch.mousemove();
-				})
-				.on('mouseout', (d, i) => {
-					this.dispatch.mouseleave();
-				})
+			.attr('x', (d, i) => (i % 8 * this._options.squareWidth) + (this._options.squareWidth / 2))
+			.attr('y', (d, i) => (Math.floor(i / 8) * this._options.squareWidth) + (this._options.squareWidth / 2))
+			.attr('width', (d) => squareSize(d) + 'px')
+			.attr('height', (d) => squareSize(d) + 'px')
+			.attr('transform', (d) => {
+				let halfWidth = squareSize(d) / 2;
+				return 'translate(-' + halfWidth + ',-' + halfWidth + ')';
+			})
+			.attr('class', 'heat-square')
+			.style('fill', (d, i) => squareColor(d))
+			.on('mouseenter', (d, i) => {
+				this.dispatch.mouseenter(d[this._options.accessor.piece][this._options.accessor.color]);
+			})
+			.on('mousemove', (d, i) => {
+				this.dispatch.mousemove();
+			})
+			.on('mouseout', (d, i) => {
+				this.dispatch.mouseleave();
+			})
 		;
 
 		//enter + update

@@ -47,52 +47,52 @@ const r4 = /(\{[^}]+\})+?/g;
 const r5 = /\d+\./g;
 const r6 = /\.\.\./g;
 const r7 = /\*/g;
-const r8 = /(1\-0)?(0\-1)?(1\/2\-1\/2)?/g;
+const r8 = /(1-0)?(0-1)?(1\/2-1\/2)?/g;
 const r9 = /\s+/;
 const r10 = /,,+/g;
 
 highland(fs.createReadStream(argv.file, {encoding: 'utf8'}))
-.splitBy(splitBy) //split pgns with multiple games by game
-.map(file => {
-	//dont bother with Set-up games
-	if( r1.test(file) ) {
-		return;
-	}
+	.splitBy(splitBy) //split pgns with multiple games by game
+	.map(file => {
+		//dont bother with Set-up games
+		if( r1.test(file) ) {
+			return;
+		}
 
-	//regexes stolen from chess.js
-	let gameMoves = file
-	.replace(file.replace(r2, '$1'), '') //strip away header text
-	.replace(r3, ' ') //join multiple lines
-	.replace(r4, '') //remove comments
-	.replace(r5, '') //remove move numbers
-	.replace(r6, '') //remove ...
-	.replace(r7, '') //remove *
-	.replace(r8, '') //remove results
-	.trim()
-	.split(r9) //split by space
-	//get rid of empty moves
-	.join(',')
-	.replace(r10, ',')
-	.split(',');
+		//regexes stolen from chess.js
+		let gameMoves = file
+			.replace(file.replace(r2, '$1'), '') //strip away header text
+			.replace(r3, ' ') //join multiple lines
+			.replace(r4, '') //remove comments
+			.replace(r5, '') //remove move numbers
+			.replace(r6, '') //remove ...
+			.replace(r7, '') //remove *
+			.replace(r8, '') //remove results
+			.trim()
+			.split(r9) //split by space
+			//get rid of empty moves
+			.join(',')
+			.replace(r10, ',')
+			.split(',');
 
-	if( gameMoves.length < 2 ) {
-		//ignore super short games
-		return;
-	}
+		if( gameMoves.length < 2 ) {
+			//ignore super short games
+			return;
+		}
 
-	heatmaps.update(gameMoves);
-	openings.update(_.take(gameMoves, 7));
-	moves.update(gameMoves);
-	numGames++;
-})
-.done(() => {
-	fs.writeFileAsync(argv.file.split('.pgn')[0] + '_stats.json', JSON.stringify({
-		heatmaps: heatmaps.data,
-		openings: openings.data,
-		moves: moves.survivalData
-	}, null, 4))
-	.then(() => {
-		console.log('  done, took'.cyan, new Date().getTime() - start.getTime(), 'ms'.cyan);
-		console.log('  processed games:', numGames);
+		heatmaps.update(gameMoves);
+		openings.update(_.take(gameMoves, 7));
+		moves.update(gameMoves);
+		numGames++;
+	})
+	.done(() => {
+		fs.writeFileAsync(argv.file.split('.pgn')[0] + '_stats.json', JSON.stringify({
+			heatmaps: heatmaps.data,
+			openings: openings.data,
+			moves: moves.survivalData
+		}, null, 4))
+			.then(() => {
+				console.log('  done, took'.cyan, new Date().getTime() - start.getTime(), 'ms'.cyan);
+				console.log('  processed games:', numGames);
+			});
 	});
-});

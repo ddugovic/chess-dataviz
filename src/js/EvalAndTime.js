@@ -87,38 +87,38 @@ export class EvalAndTime {
 		//xAxis
 		svg
 			.append('g')
-				.attr('class', 'axis x')
-				.call(this._xAxis)
+			.attr('class', 'axis x')
+			.call(this._xAxis)
 			.append('text')
-				.attr('text-anchor', 'middle')
-				.attr('transform', 'translate(' + this._width / 2 + ',-25)')
-				.text('moves (ply)')
-				.attr('class', 'axis-label')
+			.attr('text-anchor', 'middle')
+			.attr('transform', 'translate(' + this._width / 2 + ',-25)')
+			.text('moves (ply)')
+			.attr('class', 'axis-label')
 		;
 
 		//yEvalAxis
 		svg
 			.append('g')
-				.attr('class', 'axis yEval')
-				.call(this._yEvalAxis)
+			.attr('class', 'axis yEval')
+			.call(this._yEvalAxis)
 			.append('text')
-				.attr('text-anchor', 'middle')
-				.attr('transform', 'rotate(-90) translate(' + -this._yEvalScale(0) + ',-25)')
-				.text('area: evaluation (pawns)')
-				.attr('class', 'axis-label')
+			.attr('text-anchor', 'middle')
+			.attr('transform', 'rotate(-90) translate(' + -this._yEvalScale(0) + ',-25)')
+			.text('area: evaluation (pawns)')
+			.attr('class', 'axis-label')
 		;
 
 		//yTimeAxis
 		svg
 			.append('g')
-				.attr('class', 'axis yTime')
-				.attr('transform', 'translate(' + this._width + ',0)')
-				.call(this._yTimeAxis)
+			.attr('class', 'axis yTime')
+			.attr('transform', 'translate(' + this._width + ',0)')
+			.call(this._yTimeAxis)
 			.append('text')
-				.attr('text-anchor', 'middle')
-				.attr('transform', 'rotate(-90) translate(' + -this._yEvalScale(0) + ',35)')
-				.text('bars: move time (minutes)')
-				.attr('class', 'axis-label')
+			.attr('text-anchor', 'middle')
+			.attr('transform', 'rotate(-90) translate(' + -this._yEvalScale(0) + ',35)')
+			.text('bars: move time (minutes)')
+			.attr('class', 'axis-label')
 		;
 
 		//eval guide lines
@@ -146,23 +146,23 @@ export class EvalAndTime {
 
 		evalGuides.selectAll('.eval-guide-line')
 			.data(evalGuideLines).enter()
-				.append('line')
-					.attr('x1', 0)
-					.attr('y1', d => this._yEvalScale(d))
-					.attr('x2', this._width)
-					.attr('y2', d => this._yEvalScale(d))
-					.attr('class', 'eval-guide-line')
+			.append('line')
+			.attr('x1', 0)
+			.attr('y1', d => this._yEvalScale(d))
+			.attr('x2', this._width)
+			.attr('y2', d => this._yEvalScale(d))
+			.attr('class', 'eval-guide-line')
 		;
 
 		evalGuides.selectAll('.eval-guide-text')
 			.data(evalGuideTexts).enter()
-				.append('text')
-					.attr('transform', d => {
-						let offset = d.dy ? d.dy : 0;
-						return 'translate(5,' + (this._yEvalScale(d.y) + offset) + ')';
-					})
-					.text(d => d.text)
-					.attr('class', 'eval-guide-text')
+			.append('text')
+			.attr('transform', d => {
+				let offset = d.dy ? d.dy : 0;
+				return 'translate(5,' + (this._yEvalScale(d.y) + offset) + ')';
+			})
+			.text(d => d.text)
+			.attr('class', 'eval-guide-text')
 		;
 
 		//bars group
@@ -173,14 +173,14 @@ export class EvalAndTime {
 		//clip paths
 		svg.append('clipPath')
 			.attr('id', 'clip-white')
-		.append('rect')
+			.append('rect')
 			.attr('width', this._width)
 			.attr('height', this._height / 2)
 		;
 
 		svg.append('clipPath')
 			.attr('id', 'clip-black')
-		.append('rect')
+			.append('rect')
 			.attr('y', this._height / 2)
 			.attr('width', this._width)
 			.attr('height', this._height / 2)
@@ -205,11 +205,11 @@ export class EvalAndTime {
 		interactiveLayer.selectAll('.guide')
 			.data(['x', 'yEval', 'yTime']).enter()
 			.append('line')
-				.attr('x1', 0)
-				.attr('y1', 0)
-				.attr('x2', 0)
-				.attr('y2', 0)
-				.attr('class', d => `guide ${d}-guide`)
+			.attr('x1', 0)
+			.attr('y1', 0)
+			.attr('x2', 0)
+			.attr('y2', 0)
+			.attr('class', d => `guide ${d}-guide`)
 		;
 
 		//invisible rect to absorb mouse move events
@@ -257,8 +257,8 @@ export class EvalAndTime {
 					.attr('x1', -6)
 					.attr('x2', xPosition)
 					.transition().duration(100)
-						.attr('y1', yPosition)
-						.attr('y2', yPosition)
+					.attr('y1', yPosition)
+					.attr('y2', yPosition)
 				;
 
 				//draw yTime guide
@@ -269,8 +269,8 @@ export class EvalAndTime {
 					.attr('x1', xPosition)
 					.attr('x2', self._width + 6)
 					.transition().duration(100)
-						.attr('y1', yPosition)
-						.attr('y2', yPosition)
+					.attr('y1', yPosition)
+					.attr('y2', yPosition)
 				;
 
 				self.dispatch.mousemove(self._data[xPoint]);
@@ -367,8 +367,8 @@ export class EvalAndTime {
 		//enter
 		bars.enter()
 			.append('rect')
-				.attr('height', 0)
-				.attr('y', this._yTimeScale(0))
+			.attr('height', 0)
+			.attr('y', this._yTimeScale(0))
 		;
 
 		//update + enter
@@ -411,10 +411,10 @@ export class EvalAndTime {
 		lines
 			.data(['white', 'black']).enter()
 			.append('path')
-				.attr('class', (d) => `line ${d}`)
-				.attr('clip-path', (d) => `url(#clip-${d})`)
-				.datum(this._data)
-				.attr('d', line)
+			.attr('class', (d) => `line ${d}`)
+			.attr('clip-path', (d) => `url(#clip-${d})`)
+			.datum(this._data)
+			.attr('d', line)
 		;
 
 		//update + enter
@@ -433,10 +433,10 @@ export class EvalAndTime {
 		areas
 			.data(['white', 'black']).enter()
 			.append('path')
-				.attr('class', (d) => `area ${d}`)
-				.attr('clip-path', (d) => `url(#clip-${d})`)
-				.datum(this._data)
-				.attr('d', area)
+			.attr('class', (d) => `area ${d}`)
+			.attr('clip-path', (d) => `url(#clip-${d})`)
+			.datum(this._data)
+			.attr('d', area)
 		;
 
 		//update + enter

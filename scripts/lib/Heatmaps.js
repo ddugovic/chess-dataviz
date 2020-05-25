@@ -38,7 +38,7 @@ class Heatmaps {
 				move = move.substr(1);
 			}
 
-			let fromTo = move.split(/[x\-]/);
+			let fromTo = move.split(/[x-]/);
 
 			//an array in case of castling its K and R move
 			let parsedMoves = [];

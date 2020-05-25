@@ -45,8 +45,8 @@ export class Openings {
 		this.dataContainer = this.container.append('svg')
 			.attr('width', this._options.width)
 			.attr('height', this._options.height)
-				.append('g')
-					.attr('transform', 'translate(' + this._options.width / 2 + ',' + this._options.height / 2 + ')')
+			.append('g')
+			.attr('transform', 'translate(' + this._options.width / 2 + ',' + this._options.height / 2 + ')')
 		;
 
 		if( data ) {
@@ -80,15 +80,15 @@ export class Openings {
 
 		arcs.enter()
 			.append('path')
-				.attr('display', d => d.depth ? null : 'none')
-				.attr('d', this._arc)
-				.attr('fill-rule', 'evenodd')
-				.attr('class', 'arc')
-				.each(function(d) {
-					this.x0 = 0;
-					this.dx0 = 0;
-				})
-				.style('fill', fillColor)
+			.attr('display', d => d.depth ? null : 'none')
+			.attr('d', this._arc)
+			.attr('fill-rule', 'evenodd')
+			.attr('class', 'arc')
+			.each(function(d) {
+				this.x0 = 0;
+				this.dx0 = 0;
+			})
+			.style('fill', fillColor)
 		;
 
 		arcs
@@ -97,7 +97,7 @@ export class Openings {
 
 				arcs.style('opacity', 0.3);
 				arcs.filter(node => parents.indexOf(node) > -1)
-				.style('opacity', 1);
+					.style('opacity', 1);
 
 				let moves = _.pluck(parents, 'san');
 				this.dispatch.mouseenter(d, moves);
@@ -111,20 +111,20 @@ export class Openings {
 				this.dispatch.mouseleave();
 			})
 			.transition().duration(500)
-				.attrTween('d', function (d) {
-					var interpolate = d3.interpolate({
-						x: this.x0,
-						dx: this.dx0
-					}, d);
+			.attrTween('d', function (d) {
+				var interpolate = d3.interpolate({
+					x: this.x0,
+					dx: this.dx0
+				}, d);
 
-					this.x0 = d.x;
-					this.dx0 = d.dx;
+				this.x0 = d.x;
+				this.dx0 = d.dx;
 
-					return function(t) {
-						var b = interpolate(t);
-						return self._arc(b);
-					};
-				})
+				return function(t) {
+					var b = interpolate(t);
+					return self._arc(b);
+				};
+			})
 			.style('fill', fillColor)
 		;
 
@@ -133,9 +133,9 @@ export class Openings {
 		let sanText = this.dataContainer.selectAll('.san').data(nodes);
 		sanText.enter()
 			.append('text')
-				.attr('class', 'san')
-				.attr('dy', '6')
-				.attr('text-anchor', 'middle')
+			.attr('class', 'san')
+			.attr('dy', '6')
+			.attr('text-anchor', 'middle')
 		;
 
 		sanText.transition().duration(500)

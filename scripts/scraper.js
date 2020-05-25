@@ -56,30 +56,30 @@ Promise.map(pages, Promise.coroutine(function* (o) {
 	bar.tick();
 	return data;
 }), {concurrency: args.concurrency})
-.then(function (scrapedData) {
-	console.log('  Pages scraped, downloading player images.'.cyan);
+	.then(function (scrapedData) {
+		console.log('  Pages scraped, downloading player images.'.cyan);
 
-	return Promise.map(scrapedData, Promise.coroutine(function* (scraped) {
-		var game = scraped;
-		console.log(scraped);
-		game.whiteImg = yield requestPipeToFile(scraped.whiteImg, imgDir + scraped.white + '.jpg');
-		game.blackImg = yield requestPipeToFile(scraped.blackImg, imgDir + scraped.black + '.jpg');
+		return Promise.map(scrapedData, Promise.coroutine(function* (scraped) {
+			var game = scraped;
+			console.log(scraped);
+			game.whiteImg = yield requestPipeToFile(scraped.whiteImg, imgDir + scraped.white + '.jpg');
+			game.blackImg = yield requestPipeToFile(scraped.blackImg, imgDir + scraped.black + '.jpg');
 
-		return yield Promise.resolve(game);
-	}));
-})
-.then(function (games) {
-	console.log('  Scrape finished.'.green);
+			return yield Promise.resolve(game);
+		}));
+	})
+	.then(function (games) {
+		console.log('  Scrape finished.'.green);
 
-	return [games, mkdirp(dataDir)];
-})
-.spread(function (games) {
-	var json = JSON.stringify(games, null, 4);
-	return fs.writeFileAsync('data/' + args.tournament + '.json', json);
-})
-.then(function () {
-	console.log('  All done.'.green);
-});
+		return [games, mkdirp(dataDir)];
+	})
+	.spread(function (games) {
+		var json = JSON.stringify(games, null, 4);
+		return fs.writeFileAsync('data/' + args.tournament + '.json', json);
+	})
+	.then(function () {
+		console.log('  All done.'.green);
+	});
 
 function scrapePage(tournament, round, match, game) {
 	return new Promise(function (resolve, reject) {
@@ -149,30 +149,30 @@ function scrapePage(tournament, round, match, game) {
 function requestPipeToFile(url, filepath) {
 	console.log('req', url, filepath);
 	return fs.statAsync(filepath)
-	.then(function () {
-		return filepath;
-	})
-	.catch(function () {
-		return mkdirp(imgDir)
 		.then(function () {
-			return new Promise(function (resolve, reject) {
-				var stream = fs.createWriteStream(filepath)
-				.on('finish', function () {
-					return resolve(filepath);
-				})
-				.on('error', reject);
+			return filepath;
+		})
+		.catch(function () {
+			return mkdirp(imgDir)
+				.then(function () {
+					return new Promise(function (resolve, reject) {
+						var stream = fs.createWriteStream(filepath)
+							.on('finish', function () {
+								return resolve(filepath);
+							})
+							.on('error', reject);
 
-				request({
-					url: url,
-					gzip: true,
-					encoding: null
-				})
-				.on('error', reject)
-				.pipe(stream);
-			});
+						request({
+							url: url,
+							gzip: true,
+							encoding: null
+						})
+							.on('error', reject)
+							.pipe(stream);
+					});
+				});
+		})
+		.finally(function () {
+			return filepath;
 		});
-	})
-	.finally(function () {
-		return filepath;
-	});
 }

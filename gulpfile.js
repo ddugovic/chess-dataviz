@@ -25,18 +25,18 @@ gulp.task('js', function () {
 		entries: './src/js/ChessDataViz.js',
 		debug: true
 	})
-	.transform(babelify.configure({
-		presets: ['es2015']
-	}))
-	.bundle()
+		.transform(babelify.configure({
+			presets: ['es2015']
+		}))
+		.bundle()
 		.on('error', errorHandler)
-	.pipe(source('ChessDataViz.js'))
-	.pipe(buffer())
-	.pipe(gulp.dest('./dist/'))
-	.pipe(rename('ChessDataViz.min.js'))
-	.pipe(uglify())
-	.pipe(gulp.dest('./dist/'))
-	.pipe(browserSync.reload({stream:true}))
+		.pipe(source('ChessDataViz.js'))
+		.pipe(buffer())
+		.pipe(gulp.dest('./dist/'))
+		.pipe(rename('ChessDataViz.min.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest('./dist/'))
+		.pipe(browserSync.reload({stream:true}))
 	;
 });
 
@@ -45,7 +45,7 @@ gulp.task('less', function () {
 		.pipe(plumber())
 		.pipe(sourcemaps.init({loadMaps: true}))
 		.pipe(less())
-			.on('error', errorHandler)
+		.on('error', errorHandler)
 		.pipe(postcss([
 			autoprefixer({
 				browsers: ['last 2 versions']

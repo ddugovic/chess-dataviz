@@ -9,14 +9,14 @@ function parseMove(move, i) {
 	move = move.replace(/\+/g, '').replace(/#/g, '');
 
 	let piece = (/[NBRQK]/.test(move[0]) ? move[0] : 'P').toLowerCase();
-	let fromName = move.split(/[x\-]/)[0];
-	let castle = /(^e1\-g1)|(^e1\-c1)|(^e8\-g8)|(^e8\-c8)/.test(move);
+	let fromName = move.split(/[x-]/)[0];
+	let castle = /(^e1-g1)|(^e1-c1)|(^e8-g8)|(^e8-c8)/.test(move);
 
 	if( piece !== 'p' ) {
 		move = move.substr(1);
 	}
 
-	let fromTo = move.split(/[x\-]/);
+	let fromTo = move.split(/[x-]/);
 
 	let parsedMove = {
 		fromName: fromName,
@@ -109,7 +109,7 @@ class Moves {
 			currentSquareState[parsedMove.from] = _.toArray(currentSquareState[parsedMove.from]).concat(['empty']);
 
 			if( parsedMove.castle ) {
-				if( /(^e\d\-g\d)/.test(move) ) { //kingside
+				if( /(^e\d-g\d)/.test(move) ) { //kingside
 					pieceLocations['Rh' + move.charAt(1)].push('f' + move.charAt(1));
 					currentSquareState['f' + move.charAt(1)] = _.toArray(currentSquareState['f' + move.charAt(1)]).concat(['Rh' + move.charAt(1)]);
 				} else {

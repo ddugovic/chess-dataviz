@@ -62,14 +62,14 @@ export function drawBoard(svg, squareWidth) {
 	//create the g elements for squares
 	let squares = svg.selectAll('.square').data(board).enter()
 		.append('g')
-			.attr('class', (d) => {
-				let file = String.fromCharCode(97 + d.x);
-				let rank = 8 - d.y;
+		.attr('class', (d) => {
+			let file = String.fromCharCode(97 + d.x);
+			let rank = 8 - d.y;
 
-				return 'square ' + file + rank;
-			})
-			.classed('white', (d) => isWhite(d))
-			.classed('black', (d) => ! isWhite(d))
+			return 'square ' + file + rank;
+		})
+		.classed('white', (d) => isWhite(d))
+		.classed('black', (d) => ! isWhite(d))
 	;
 
 	//create square elements for board squares
@@ -87,12 +87,12 @@ export function drawBoard(svg, squareWidth) {
 	//file labels
 	svg.selectAll(fileLabels)
 		.append('text')
-			.attr('x', (d) => d.x * squareWidth)
-			.attr('y', (d) => d.y * squareWidth)
-			.attr('dx', '0.2em')
-			.attr('dy', '1em')
-			.text((d) => 8 - d.y)
-			.attr('class', 'label')
+		.attr('x', (d) => d.x * squareWidth)
+		.attr('y', (d) => d.y * squareWidth)
+		.attr('dx', '0.2em')
+		.attr('dy', '1em')
+		.text((d) => 8 - d.y)
+		.attr('class', 'label')
 	;
 
 	//a-h labels for files
@@ -102,12 +102,12 @@ export function drawBoard(svg, squareWidth) {
 	//rank labels
 	svg.selectAll(rankLabels)
 		.append('text')
-			.attr('x', (d) => (d.x + 1) * squareWidth)
-			.attr('y', (d) => (d.y + 1) * squareWidth)
-			.attr('dx', '-0.3em')
-			.attr('dy', '-0.5em')
-			.attr('text-anchor', 'end')
-			.text((d) => files[d.x])
-			.attr('class', 'label')
+		.attr('x', (d) => (d.x + 1) * squareWidth)
+		.attr('y', (d) => (d.y + 1) * squareWidth)
+		.attr('dx', '-0.3em')
+		.attr('dy', '-0.5em')
+		.attr('text-anchor', 'end')
+		.text((d) => files[d.x])
+		.attr('class', 'label')
 	;
 }
