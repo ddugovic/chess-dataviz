@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "bluebird": "^3.0.1",
-    "chess.js": "^0.11.0",
+    "chess.js": "^0.12.0",
     "colors": "^1.1.2",
     "debug": "^4.3.1",
     "highland": "^2.5.1",
