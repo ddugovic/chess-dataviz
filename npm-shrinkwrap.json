@@ -2019,9 +2019,9 @@
       }
     },
     "chess.js": {
-      "version": "0.11.0",
-      "resolved": "https://registry.npmjs.org/chess.js/-/chess.js-0.11.0.tgz",
-      "integrity": "sha512-yTpi6XbRMkBtnjSvbt6wEp9Y7JzhJl1MC3GNn67q5ClyccXxCRf5cMPSUg4OblrUapg1kLHm7WzxxEVp20NK1Q=="
+      "version": "0.12.0",
+      "resolved": "https://registry.npmjs.org/chess.js/-/chess.js-0.12.0.tgz",
+      "integrity": "sha512-eF1xf4j88r/AwIRxqV1FXZbVgMt4yUx05xrL+ZMqUrY+snFrUxGVHs0VgEd3AvngujDE9th7XZqqCwEKEQ7mWQ=="
     },
     "chokidar": {
       "version": "2.1.8",
